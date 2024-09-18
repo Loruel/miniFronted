@@ -9,6 +9,11 @@ export const MiniProvider = ({ children }) => {
 
     const [user, setUser] = useState(null)
     const setLocation = useNavigate()
+    const [openModal, setOpenModal] = useState(false)
+
+    const toggleModal = () => {
+        setOpenModal(!openModal);
+    }
 
     const loginMutation = useMutation({
 
@@ -56,7 +61,7 @@ export const MiniProvider = ({ children }) => {
 
     return (
 
-        <MiniContext.Provider value={{ user, loginMutation, setUserData, registerMutation, updateProfileMutation }}>
+        <MiniContext.Provider value={{ user, loginMutation, setUserData, registerMutation, updateProfileMutation, openModal, toggleModal }}>
             {children}
         </MiniContext.Provider>
 

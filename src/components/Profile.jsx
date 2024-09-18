@@ -1,17 +1,18 @@
 import React, { useContext } from 'react'
 import Footer from './Footer'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { MiniContext } from '../context/AuthContext'
+import ModalProfile from './ModalProfile'
 
 export default function Profile() {
-    const { user } = useContext(MiniContext)
-    const setLocation = useNavigate()
+    const { user, toggleModal } = useContext(MiniContext)
+    /* const setLocation = useNavigate()
 
     const handleLogout = () => {
         localStorage.removeItem('authToken')
         console.clear()
         setLocation('/')
-    }
+    } */
 
     return (
         <div className='dark:bg-[#252329]'>
@@ -22,21 +23,24 @@ export default function Profile() {
                 <div className='w-full h-full flex justify-end'>
 
                     <button
-                        onClick={handleLogout}
-                        className='flex items-center w-32 mr-2'>
+                        onClick={toggleModal}
+                        className='flex justify-end items-center w-32 mr-2'>
                         <figure className='w-8'>
                             <img
                                 className='rounded-md'
                                 src="/profile.png" alt="" />
                         </figure>
-                        <p className='ml-2 font-semibold'>
-                            {user?.name}
+                        <p className='ml-2 font-semibold hidden  lg:block'>
+                            {user?.name?.split(' ')[0]} 
                         </p>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-4 hidden  lg:block">
                             <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                         </svg>
 
                     </button>
+
+                    <ModalProfile />
+
                 </div>
             </div>
 
